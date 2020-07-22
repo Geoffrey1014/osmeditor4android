@@ -35,7 +35,13 @@
 		android:fullBackupContent="@xml/backup"
 		android:resizeableActivity="true" 
 		android:theme="@style/Theme.AppCompat" >
-		
+
+		<receiver android:name=".SMSInstrumentedReceiver">
+			<intent-filter>
+				<action android:name="edu.gatech.m3.emma.COLLECT_COVERAGE" />
+			</intent-filter>
+		</receiver>
+
 	    <activity
     		android:name=".Splash"
     		android:theme="@style/SplashTheme">
