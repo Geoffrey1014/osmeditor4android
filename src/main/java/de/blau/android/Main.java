@@ -1403,6 +1403,7 @@ public class Main extends FullScreenAppCompatActivity implements ServiceConnecti
 		}
 		switch (item.getItemId()) {
 		case R.id.menu_config:
+			Log.i("Themis", "onOptionsItemSelected: step 1: click \"menu_config\" ");
 			PrefEditor.start(this,getMap().getViewBox());
 			return true;
 			

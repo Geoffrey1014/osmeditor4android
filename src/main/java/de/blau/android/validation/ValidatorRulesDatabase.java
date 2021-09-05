@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
 import de.blau.android.util.collections.MultiHashMap;
 
 /**
@@ -119,6 +121,14 @@ public class ValidatorRulesDatabase {
         values.put(VALUE_FIELD, value);
         values.put(ISREGEXP_FIELD, isRegexp ? 1 : 0);
         values.put(DAYS_FIELD, days);
+
+        if(value != null && value.equals("*") && (days==365)){
+            Log.i("Themis", "updateResurvey: step 5: Set value to \"*\", max. age to \"365\"");
+        }
+        else{
+            Log.i("Themis", "updateResurvey: step 5: warnning: Set key to " + key + ", value to " + value +", max. age to "+ days);
+        }
+
         db.insert(RESURVEY_TABLE, null, values);       
     }
 
@@ -138,6 +148,14 @@ public class ValidatorRulesDatabase {
         values.put(VALUE_FIELD, value);
         values.put(ISREGEXP_FIELD, isRegexp ? 1 : 0);
         values.put(DAYS_FIELD, days);
+        if(value != null && value.equals("*") && (days==365)){
+            Log.i("Themis", "updateResurvey: step 5: Set value to \"*\", max. age to \"365\"");
+        }
+        else{
+            Log.i("Themis", "updateResurvey: step 5: warnning: Set key to " + key + ", value to " + value +", max. age to "+ days);
+        }
+
+
         db.update(RESURVEY_TABLE, values, "rowid=" + id, null);
     }
 

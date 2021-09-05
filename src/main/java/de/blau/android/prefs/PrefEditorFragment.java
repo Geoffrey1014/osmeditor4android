@@ -155,6 +155,7 @@ public class PrefEditorFragment extends PreferenceFragmentCompat {
 	            @Override
 	            public boolean onPreferenceClick(Preference preference) {
 	                Log.d(DEBUG_TAG, "onPreferenceClick validator");
+					Log.i("themis", "onPreferenceClick validator: step 2: click \"KEY_VALIDATOR\" ");
 	                ValidatorRulesUI ui = new ValidatorRulesUI();
 	                ui.manageRulesetContents(getContext());
 	                return true;

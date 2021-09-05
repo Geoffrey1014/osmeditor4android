@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
 import de.blau.android.App;
 import de.blau.android.R;
 import de.blau.android.osm.Node;
@@ -206,7 +208,14 @@ public class BaseValidator implements Validator {
         SortedMap<String,String>tags = way.getTags();
         // tag based checks
         if (tags != null) {
-            status = validateElement(status, way, tags);
+            try{
+//                Log.i("Themis", "validate: step last");
+                status = validateElement(status, way, tags);
+            }catch(NullPointerException e){
+                Log.i("Themis", "validate: step last: bomb! ");
+                throw e;
+            }
+
         }
         String highway = way.getTagWithKey(Tags.KEY_HIGHWAY); 
         if (highway != null) {
