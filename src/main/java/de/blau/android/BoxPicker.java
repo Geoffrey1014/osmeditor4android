@@ -344,9 +344,11 @@ public class BoxPicker extends BugFixedAppCompatActivity implements LocationList
 	private void performClick(final int buttonId, final int checkedRadioButtonId, final String lat, final String lon) {
 		BoundingBox box = null;
 		int resultState = (buttonId == R.id.location_button_current) ? RESULT_OK : RESULT_CANCELED;
-// return bbox even if cancelled
-//		if (resultState == RESULT_CANCELED)
-//			finish();
+		if(resultState == RESULT_OK){
+			Log.i("Themis", "Event 1: Clicked \"LOAD\" in \"Download at other location\"");
+		}else{
+			Log.i("Themis", "Warning 1: Clicked \"GO TO MAP\" in \"Download at other location\"");
+		}
 		
 		switch (checkedRadioButtonId) {
 		case R.id.location_current:

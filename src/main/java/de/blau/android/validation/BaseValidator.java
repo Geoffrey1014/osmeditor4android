@@ -212,7 +212,7 @@ public class BaseValidator implements Validator {
 //                Log.i("Themis", "validate: step last");
                 status = validateElement(status, way, tags);
             }catch(NullPointerException e){
-                Log.i("Themis", "validate: step last: bomb! ");
+                Log.i("Themis", "Crash!: NullPointerException");
                 throw e;
             }
 

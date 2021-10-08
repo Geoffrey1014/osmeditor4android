@@ -63,7 +63,7 @@ public class ValidatorRulesUI {
         alertDialog.setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                Log.i("Themis", "onDismiss: step 6: click \"Done\" ");
+                Log.i("Themis", "Event 9: click \"Done\" in \"Validator ruleset Default\" ");
                 resurveyCursor.close();
                 writableDb.close();
             }
@@ -132,7 +132,7 @@ public class ValidatorRulesUI {
                 public void onClick(View v) {
                     Integer id = (Integer) view.getTag();
                     showResurveyDialog(context, db, true, id != null ? id.intValue() : -1);
-                    Log.i("Themis", "onClick ResurveyAdapter: step 3.1: click a \" resurvey_entry\"");
+                    Log.i("Themis", "Event 4: Clicked a \" re-survey_entry\"");
                 }
             });
         }
@@ -187,7 +187,7 @@ public class ValidatorRulesUI {
             alertDialog.setNeutralButton(R.string.Delete, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Log.i("Themis", " showCheckDialog: step 4.1: delete a resyrvey_entry");
+                    Log.i("Themis", "Event 5: Deleted a re-survey_entry");
                     Log.d(DEBUG_TAG, "deleting template " + Integer.toString(id));
                     ValidatorRulesDatabase.deleteResurvey(db, id);
                     newResurveyCursor(db);
@@ -197,7 +197,12 @@ public class ValidatorRulesUI {
         } else {
             alertDialog.setTitle(R.string.add_resurvey_title);
         }
-        alertDialog.setNegativeButton(R.string.Cancel, null);
+        alertDialog.setNegativeButton(R.string.Cancel,  new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("Themis", "Warning 5: Cancel to edit a re-survey_entry");
+            }
+        });
  
         alertDialog.setPositiveButton(R.string.Save, new DialogInterface.OnClickListener() {
             @Override
@@ -206,7 +211,7 @@ public class ValidatorRulesUI {
                     ValidatorRulesDatabase.addResurvey(db, 0, keyEdit.getText().toString(), valueEdit.getText().toString(), regexpCheck.isChecked(), daysPicker.getValue());
                 } else {
                     ValidatorRulesDatabase.updateResurvey(db, id, keyEdit.getText().toString(), valueEdit.getText().toString(), regexpCheck.isChecked(), daysPicker.getValue());
-                    Log.i("Themis", " showCheckDialog: step 3.1: WARNNING: update a resyrvey_entry");
+                    Log.i("Themis", "Warning 5: Save to edit a re-survey_entry");
                 }
                 newResurveyCursor(db);
                 resetValidator(context);
@@ -262,7 +267,7 @@ public class ValidatorRulesUI {
                 public void onClick(View v) {
                     Integer id = (Integer) view.getTag();
                     showCheckDialog(context, db, true, id != null ? id.intValue() : -1);
-                    Log.i("Themis", "onClick CheckAdapter: step 3.2: click a \"check_entry\"");
+                    Log.i("Themis", "Event 6: Clicked a \"check_entry\"");
                 }
             });
         }
@@ -311,7 +316,7 @@ public class ValidatorRulesUI {
             alertDialog.setNeutralButton(R.string.Delete, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Log.i("Themis", " showCheckDialog: step 4.2: delete a check_entry");
+                    Log.i("Themis", "Event 7: Deleted a check_entry");
                     Log.d(DEBUG_TAG, "deleting template " + Integer.toString(id));
                     ValidatorRulesDatabase.deleteCheck(db, id);
                     newCheckCursor(db);
@@ -321,7 +326,12 @@ public class ValidatorRulesUI {
         } else {
             alertDialog.setTitle(R.string.add_check_title);
         }
-        alertDialog.setNegativeButton(R.string.Cancel, null);
+        alertDialog.setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("Themis", "Warning 7: Cancel to edit a check_entry");
+            }
+        });
  
         alertDialog.setPositiveButton(R.string.Save, new DialogInterface.OnClickListener() {
             @Override
@@ -330,7 +340,7 @@ public class ValidatorRulesUI {
                     ValidatorRulesDatabase.addCheck(db, 0, keyEdit.getText().toString(), optionalEdit.isChecked());
                 } else {
                     ValidatorRulesDatabase.updateCheck(db, id, keyEdit.getText().toString(), optionalEdit.isChecked());
-                    Log.i("Themis", " showCheckDialog: step 3.2: Warnning: update a check_entry");
+                    Log.i("Themis", "Warning 7: Save to edit a check_entry");
                 }
                 newCheckCursor(db);
                 resetValidator(context);

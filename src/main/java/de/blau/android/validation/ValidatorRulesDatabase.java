@@ -122,12 +122,8 @@ public class ValidatorRulesDatabase {
         values.put(ISREGEXP_FIELD, isRegexp ? 1 : 0);
         values.put(DAYS_FIELD, days);
 
-        if(value != null && value.equals("*") && (days==365)){
-            Log.i("Themis", "updateResurvey: step 5: Set value to \"*\", max. age to \"365\"");
-        }
-        else{
-            Log.i("Themis", "updateResurvey: step 5: warnning: Set key to " + key + ", value to " + value +", max. age to "+ days);
-        }
+
+        Log.i("Themis", "Event 8: Set key, value, and max.age respectively to: " + key + ", " + value +", "+ days);
 
         db.insert(RESURVEY_TABLE, null, values);       
     }
@@ -148,13 +144,13 @@ public class ValidatorRulesDatabase {
         values.put(VALUE_FIELD, value);
         values.put(ISREGEXP_FIELD, isRegexp ? 1 : 0);
         values.put(DAYS_FIELD, days);
-        if(value != null && value.equals("*") && (days==365)){
-            Log.i("Themis", "updateResurvey: step 5: Set value to \"*\", max. age to \"365\"");
-        }
-        else{
-            Log.i("Themis", "updateResurvey: step 5: warnning: Set key to " + key + ", value to " + value +", max. age to "+ days);
-        }
-
+//        if(value != null && value.equals("*") && (days==365)){
+//            Log.i("Themis", "Event 7: Set value to \"*\", max. age to \"365\"");
+//        }
+//        else{
+//            Log.i("Themis", "Warning 7: Set key to " + key + ", value to " + value +", max. age to "+ days);
+//        }
+        Log.i("Themis", "Event 8: Set key, value, and max.age respectively to: " + key + ", " + value +", "+ days);
 
         db.update(RESURVEY_TABLE, values, "rowid=" + id, null);
     }
