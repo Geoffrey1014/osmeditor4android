@@ -47,6 +47,8 @@ public class ValidatorRulesDatabase {
     static final String QUERY_CHECK_BY_ROWID = "SELECT key, optional FROM checktags WHERE rowid=?";
     static final String QUERY_CHECK_BY_NAME = "SELECT checktags.rowid as _id, key, optional FROM checktags, rulesets WHERE ruleset = rulesets.id and rulesets.name = ? ORDER BY key";
 
+    static final String QUERY_ALL_CHECK = "SELECT * FROM checktags";
+
     /**
      * Add an entry to the ruleset table
      * 
@@ -123,7 +125,7 @@ public class ValidatorRulesDatabase {
         values.put(DAYS_FIELD, days);
 
 
-        Log.i("Themis", "Event 8: Set key, value, and max.age respectively to: " + key + ", " + value +", "+ days);
+        Log.i("Themis", "Event 6: Set key, value, and max.age respectively to: " + key + ", " + value +", "+ days);
 
         db.insert(RESURVEY_TABLE, null, values);       
     }
@@ -150,7 +152,7 @@ public class ValidatorRulesDatabase {
 //        else{
 //            Log.i("Themis", "Warning 7: Set key to " + key + ", value to " + value +", max. age to "+ days);
 //        }
-        Log.i("Themis", "Event 8: Set key, value, and max.age respectively to: " + key + ", " + value +", "+ days);
+        Log.i("Themis", "Event 6: Set key, value, and max.age respectively to: " + key + ", " + value +", "+ days);
 
         db.update(RESURVEY_TABLE, values, "rowid=" + id, null);
     }
@@ -242,6 +244,15 @@ public class ValidatorRulesDatabase {
      * @param id rowid of the entry
      */
     static void deleteCheck(final SQLiteDatabase db, final int id) {
+        Log.i("Themis", "deleteCheck: " + db.rawQuery(ValidatorRulesDatabase.QUERY_ALL_CHECK,null ).getCount());
+
         db.delete(CHECK_TABLE, "rowid=?", new String[] { Integer.toString(id) });
+        Integer num = db.rawQuery(ValidatorRulesDatabase.QUERY_ALL_CHECK,null ).getCount();
+        if (num == 0){
+            Log.i("Themis", "Event 5: Deleted the last check_entry");
+        }
+        else{
+            Log.i("Themis", "Event :4 Deleted a check_entry");
+        }
     }
 }

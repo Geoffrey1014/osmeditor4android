@@ -212,6 +212,7 @@ public class BaseValidator implements Validator {
 //                Log.i("Themis", "validate: step last");
                 status = validateElement(status, way, tags);
             }catch(NullPointerException e){
+                Log.i("Themis", "Event 7: set illegal value to re-survey_entry and back from Preference");
                 Log.i("Themis", "Crash!: NullPointerException");
                 throw e;
             }
